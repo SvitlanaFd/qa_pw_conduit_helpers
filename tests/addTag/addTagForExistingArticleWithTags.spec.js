@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
   await signUpUser(page, user);
 });
 
-test('Add the tag for the existing article with tags* ', async ({ page }) => {
+test('Add the tag for the existing article with tags', async ({ page }) => {
   const article = generateNewArticleData(1);
   const newTag = faker.lorem.word();
 

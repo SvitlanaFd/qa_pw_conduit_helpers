@@ -43,7 +43,7 @@ export class EditArticlePage extends CreateArticlePage {
   }
 
   async assertErrorMessageIsVisible(message) {
-    await test.step(`Assert the error message is visible'`, async () => {
+    await test.step(`Assert the error message is visible`, async () => {
       await expect(this.page.getByText(message)).toBeVisible();
     });
   }

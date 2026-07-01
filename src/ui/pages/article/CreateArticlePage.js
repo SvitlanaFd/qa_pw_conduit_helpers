@@ -51,7 +51,7 @@ export class CreateArticlePage {
       await this.fillDescriptionField(article.description);
       await this.fillTextField(article.text);
 
-      if (article.tags.length > 0) {
+      if (Array.isArray(article.tags) && article.tags.length > 0) {
         for (const tag of article.tags) {
           await this.addTag(tag);
         }

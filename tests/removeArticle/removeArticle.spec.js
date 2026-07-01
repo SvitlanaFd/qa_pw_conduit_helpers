@@ -25,12 +25,11 @@ test.beforeEach(async ({ page }) => {
   await signUpUser(page, user);
 });
 
-test('Remove an article tag for the existing article with tag* ', async ({
+test('Remove an article tag for the existing article with tag', async ({
   page,
 }) => {
   const article = generateNewArticleData(1);
-  const newTag = faker.lorem.word();
-
+  
   await homePage.clickNewArticleLink();
 
   await createNewArticle(page, article);
@@ -39,12 +38,14 @@ test('Remove an article tag for the existing article with tag* ', async ({
 
   await editArticlePage.clickRemoveTagButton();
 
+  await page.waitForTimeout(2000); // workaround for the issue with the button not being clickable
+
   await editArticlePage.clickUpdateArticleButton();
 
-  await viewArticlePage.assertArticleTagIsNotVisible(newTag);
+  await viewArticlePage.assertArticleTagIsNotVisible(article.tags[0]);
 });
 
-test('Remove an article title for the existing article*', async ({ page }) => {
+test('Remove an article title for the existing article', async ({ page }) => {
   const article = generateNewArticleData(1);
 
   await homePage.clickNewArticleLink();
@@ -60,7 +61,7 @@ test('Remove an article title for the existing article*', async ({ page }) => {
   await editArticlePage.assertErrorMessageIsVisible(TITLE_CANNOT_BE_EMPTY);
 });
 
-test('Remove an article description for the existing article*', async ({
+test('Remove an article description for the existing article', async ({
   page,
 }) => {
   const article = generateNewArticleData(1);
